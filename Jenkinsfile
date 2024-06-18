@@ -5,8 +5,6 @@ pipeline {
             steps {
                 echo 'Update and upgrade'
                 sh 'sudo apt upgrade && sudo apt upgrade'
-            }
-            steps {
                 echo 'Running build automation'
                 sh './gradlew build --no-daemon'
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
