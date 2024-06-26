@@ -3,8 +3,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Update and upgrade'
-                sh 'sudo apt-get --assume-yes upgrade && sudo apt-get --assume-yes upgrade'
                 echo 'Running build automation'
                 sh './gradlew build --no-daemon'
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
@@ -16,7 +14,7 @@ pipeline {
             }
             steps {
                 script {
-                    app = docker.build("pablo14lnx/train-schedule")
+                    app = docker.build("pablo14lnx/train-schedule/train-schedule")
                     app.inside {
                         sh 'echo $(curl localhost:8080)'
                     }
